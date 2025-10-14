@@ -18,26 +18,3 @@ export async function saveState(req, res) {
 }
 
 
-
-
-
-// import AppState from "../models/AppState.js";
-
-// const router = express.Router();
-
-// router.post("/save", async (req, res) => {
-//   const { userId, state } = req.body;
-
-//   try {
-//     const saved = await AppState.findOneAndUpdate(
-//       { userId },
-//       { state, lastUpdated: new Date() },
-//       { upsert: true, new: true }
-//     );
-//     res.json({ success: true, data: saved });
-//   } catch (err) {
-//     res.status(500).json({ error: err.message });
-//   }
-// });
-
-
