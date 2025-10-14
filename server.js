@@ -11,6 +11,9 @@ app.listen('7000', ()=> {
     console.log("Server is running on the port 7000")
 })
 
+// parse middleware
+app.use(express.json());
+
 // mongoose database connection
 mongoose.connect("mongodb://localhost:27017/appState");
 const db = mongoose.connection;

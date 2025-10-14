@@ -5,13 +5,26 @@ export async function saveState(req, res) {
     const { userID, state } = req.body;
 
     try {
-        const saved = await appModel.findOneAndUpdate(
-            { userID }, 
-            { state, lastUpdate: new Date() },
-            { upsert: true, new: true }
-        )
+        const user = await appModel.find({userID: userID});
+        if (user) {
+            const saved = await appModel.findOneAndUpdate(
+                { userID }, 
+                { state, lastUpdate: new Date() },
+                { upsert: true, new: true }
+            )
 
-        return res.status(200).json({message: 'data saved successfully', data:saved});
+            return res.status(200).json({message: 'data saved successfully', data:saved});
+        }
+        else {
+            const newState = await new appModel({
+                userID,
+                state
+            })
+
+            await newState.save();
+        }
+
+        
     }
     catch (error) {
         return res.status(500).json({error: error.message})
